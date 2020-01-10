@@ -1,8 +1,5 @@
 package com.commentremover.processors;
 
-import com.commentremover.app.CommentRemover;
-import com.commentremover.exception.CommentRemoverException;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,6 +10,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.commentremover.app.CommentRemover;
+import com.commentremover.exception.CommentRemoverException;
 
 abstract class AbstractFileProcessor {
 
@@ -80,6 +80,6 @@ abstract class AbstractFileProcessor {
     }
 
     protected boolean isContainTodo(String foundToken) {
-        return Pattern.compile(Pattern.quote("todo"), Pattern.CASE_INSENSITIVE).matcher(foundToken).find();
+        return Pattern.compile(String.format("(%s|%s)", Pattern.quote("todo"), Pattern.quote("checkstyle.")), Pattern.CASE_INSENSITIVE).matcher(foundToken).find();
     }
 }
